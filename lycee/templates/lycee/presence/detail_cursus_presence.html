@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% if liste %}
+		
+    {% block title %}
+				<h3>Details of class {{cursus.name}} {{cursus.scholar_year}} </h3>
+    {% endblock %}
+
+    {% block content %}
+			<ul>
+				{% for presence in liste %} 
+							<li><a href="/lycee/student/{{presence.student.id}}">{{presence.student.first_name }} {{presence.student.last_name}}</a></li> 
+				{% endfor %}
+			</ul>
+    {% endblock %}
+{% else %}
+     <p>No student to show.</p>
+{% endif %}

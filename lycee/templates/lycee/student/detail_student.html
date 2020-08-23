@@ -7,6 +7,9 @@
     {% endblock %}
 
     {% block content %}
+			<table>
+				<tr>
+					<td>
             <h3>{{liste.first_name }} {{liste.last_name}}</h3>
             <ul>
                 <li>{{liste.birth_date}}</li>
@@ -14,7 +17,14 @@
                 <li>{{liste.email|lower}}</li>
                 <li>{{liste.cursus}}</li>
             </ul>
-            
+
+					</td>
+				<tr>
+					<td>
+						<input class="create-student" type="button" value="Edit student" onclick="window.location='/lycee/student/{{liste.id}}/edit';"/>
+					</td>
+				</tr>
+			</table>
     {% endblock %}
 {% else %}
      <p>No student to show.</p>

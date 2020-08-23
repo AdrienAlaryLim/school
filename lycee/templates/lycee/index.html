@@ -7,15 +7,38 @@
   {% endblock %}
 
   {% block content %}
+		<table>
+			
     {% for cursus in liste %}
-    <div class="container">
-      <div class="row">
-        <div class = "col-sm-2">
-      <a href="/lycee/{{cursus.id }}">{{cursus.name}}</a>
-    </div>
-      
+			<tr>
+				<td>
+					<!--<div class="container">
+						<div class="row">
+							<div class = "col-sm-2"> !-->
+					<a href="/lycee/{{cursus.id }}">{{cursus.name}}</a>
+							<!--</div>
+						</div>
+					</div>!-->
+				</td>
+				<td>
+						<input class="callof-roll" type="button" value="Call of roll" onclick="window.location='/lycee/cursuscall/{{cursus.id }}';"/>
+				</td>
+			</tr>
     {% endfor %}
-  {% endblock %}
+
+			<tr>
+				<td>
+					<input class="particular-roll" type="button" value="Particular call of roll" onclick="window.location='/lycee/call/';"/>
+					</td>
+			<tr>
+
+			<tr>
+				<td>
+					<input class="create-student" type="button" value="Create student" onclick="window.location='/lycee/student/create';"/>
+					</td>
+			<tr>
+		</table>
+	{% endblock %}
 {% else %}
   <p> No cursus to show .</p>
 

@@ -1,5 +1,5 @@
 from django.forms.models import ModelForm
-from .models import Student
+from .models import Student, Presence
 
 class StudentForm(ModelForm):
 
@@ -17,3 +17,14 @@ class StudentForm(ModelForm):
       "comments",
       "cursus",
     )
+
+class PresenceForm(ModelForm):
+	class Meta:
+		model = Presence
+
+		fields = (
+			"reason",
+			"isMissing",
+			"date",
+			"student",
+		)

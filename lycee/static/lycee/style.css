@@ -46,3 +46,29 @@ html {
 .formstd{
     background-color : #ff0000
 }
+
+.create-student{
+	background-color: #009;
+	color: white;
+}
+
+.particular-roll{
+	background-color: #e61919;
+	color: white;
+}
+
+.callof-roll{
+	background-color: #f0b71b;
+	color: white;
+}
+
+table{
+	width: 300px
+}
+
+tr, td{
+	width: 100px;
+	height: 30px;
+	padding: 10px
+}
+

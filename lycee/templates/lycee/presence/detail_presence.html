@@ -1,0 +1,20 @@
+{% extends "master.html" %}
+
+{% if liste %}
+		
+    {% block title %}
+				<h3>Details of presence </h3>
+    {% endblock %}
+
+    {% block content %}
+			<ul>
+				{% for presence in liste %}
+							<li>{{presence.date}} - 
+							<a href="/lycee/student/{{student.id }}">{{presence.student.first_name }} {{presence.student.last_name}}</a></li> 
+							<br>
+				{% endfor %}
+			</ul>
+    {% endblock %}
+{% else %}
+     <p>No presence to show.</p>
+{% endif %}
