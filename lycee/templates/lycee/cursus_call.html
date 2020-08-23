@@ -7,16 +7,16 @@
     {% endblock %}
 
     {% block content %}
-		<form action="/lycee/cursuscall/send/" method="post">{% csrf_token %}
+		<form action="/lycee/cursuscall/send/" method="POST">{% csrf_token %}
 			<table>
 				<tr>
-					<td><input type="date" id="calendrier" name="calendrier" required="true">
+					<td><input type="date" id="date" name="date" required="true">
 				</tr>
 				{% for student in liste %} 
 					<tr>
 						<td>
-							<input type="checkbox" id="call-{{student.first_name }}-{{student.last_name}}" name="call-{{student.first_name }}-{{student.last_name}}">
-							<label for="cursus-call-{{student.first_name }}-{{student.last_name}}">{{student.first_name }} {{student.last_name}}</label> 
+							<input type="checkbox" id="call-{{student.email}}" name="call-{{student.email}}">
+							<label for="cursus-call-{{student.email}}">{{student.email }}</label> 
 						</td>
 					</tr>
 				{% endfor %}

@@ -1,13 +1,13 @@
 from django.shortcuts import render
 # Create your views here.
-from django.http import HttpResponse, QueryDict
+from django.http import HttpResponse
 from .models import Cursus,Student,Presence
 from .form import StudentForm, PresenceForm
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from django.utils import encoding
+import urllib
 
 
 #def index(request):
@@ -59,24 +59,27 @@ def cursusCallOf(request, cursus_id):
 
 def cursusCallOfTreatment(request):
 	
-	stringList = str(request)
-	#calendrier = stringRequest.parse
+	stringRequest = str(request.body)
+	stringList = stringRequest.split('&')
+
+	date_missing = stringList[1][5:]
+
+	#student_list = Student.objects.all()
+
+	for x in range(2, len(stringList)):
+		mail = stringList[x].replace('%40', '@')[5:]
+		mail = mail.replace('=on','')
+		mail = mail.replace('\'','')
+			
+		studentMiss = Student.objects.get(email=mail)
+		
+		presence = Presence(isMissing=True, student=studentMiss, date=date_missing)
+		presence.full_clean()
+		presence.save()
+	return HttpResponse(studentMiss)
 	
-#	if request.method == 'POST':
-	#QDrequest = QueryDict.__init__(request.body)
-	"""students_missing = list(QDrequest.items())
-		for student_var in students_missing:
-			presence = Presence(isMissing=True, student=student_var)
-			presence.full_clean()
-			presence.save()
-
-		#all_presences = presence.objects.all()
-		# contexte"""
-	#context = { 'liste' : QDrequest}
-	"""return render (request, 'lycee/detail_calls.html' , context)
-	#data = json.loads(request.body.decode('utf-8'))"""
-	return HttpResponse(stringList)
-
+	
+	
 class ParticularPresenceCreateView(CreateView):
   # ref au modEle
   model = Presence
@@ -94,6 +97,18 @@ def DetailPresence(request):
 		# context
 		context = {'liste': result_list}
 		return render (request, 'lycee/presence/detail_presence.html' , context)
+
+class ParticularPresenceEditView(UpdateView):
+  # ref au modEle
+  model = Presence
+  # ref au formulaire
+  form_class = PresenceForm
+  # le nom du render
+  template_name = "lycee/presence/edit_presence.html"
+
+  # page appelEe si creation ok
+  def get_success_url(self):
+    return reverse ("details_presence", args=(self.object.pk,))
 
 class StudentCreateView(CreateView):
   # ref au modEle

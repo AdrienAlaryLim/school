@@ -78,8 +78,9 @@ class Student(models.Model):
 class Presence(models.Model):
 	reason = models.CharField(
 				max_length=50,
-				blank=False,
-				null=False
+				blank=True,
+				null=False,
+				default=""
   )
 	date = models.DateField(
 				verbose_name='date of the day',
