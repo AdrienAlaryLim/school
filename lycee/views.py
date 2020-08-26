@@ -76,8 +76,10 @@ def cursusCallOfTreatment(request):
 		presence = Presence(isMissing=True, student=studentMiss, date=date_missing)
 		presence.full_clean()
 		presence.save()
-	return HttpResponse(studentMiss)
-	
+
+	# contexte
+	#context = { 'liste' : result_list, 'cursus'	: cursus}
+	return DetailPresence(request) 
 	
 	
 class ParticularPresenceCreateView(CreateView):

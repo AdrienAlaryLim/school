@@ -10,7 +10,7 @@
 		<form action="/lycee/cursuscall/send/" method="POST">{% csrf_token %}
 			<table>
 				<tr>
-					<td><input type="date" id="date" name="date" required="true">
+					<td><input type="date" id="date" name="date" required="true"></td>
 				</tr>
 				{% for student in liste %} 
 					<tr>
